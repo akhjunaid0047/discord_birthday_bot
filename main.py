@@ -41,8 +41,9 @@ async def check_birthdays():
                 message_author = await client.fetch_user(int(owner_id))
                 channels = client.get_channel(int(owner_ch))
                 if channels is not None:
-                    await channels.send(f"Happy Birthday to {' '.join(birthday_today)} :partying_face: ")
-                    await message_author.send(f"It is {' '.join(birthday_today)}'s Birthday!")
+                    for birthday in birthday_today:
+                        await channels.send(f"Happy Birthday to {birthday} :partying_face: ")
+                        await message_author.send(f"It is  {birthday}'s Birthday!")
 
         await asyncio.sleep(60)
 
@@ -93,7 +94,8 @@ async def on_message(message):
         today_birthdays = [name for name,
                            date in birthdays.items() if date == today]
         if today_birthdays:
-            await message.channel.send(f"It is {' '.join(today_birthdays)}'s Birthday!")
+            for birthday in today_birthdays:
+                await message.channel.send(f"It is {birthday}'s Birthday!")
         else:
             await message.channel.send("No birthdays today.")
 
