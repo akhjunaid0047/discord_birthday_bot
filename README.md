@@ -12,11 +12,11 @@ A simple Discord Bot which can be used to ping you and your friend's birthdays.
 
 ## Commands
 
-- `!add <words_in_name> <full_name>` - This command adds a birthday to the dictionary. Note: The `<words_in_name>` must be a numeric value. Only administrators have the right to use this command.
+- `!add <words_in_name> <full_name> <date>` - This command adds a birthday to the dictionary. Note: The `<words_in_name>` must be a numeric value. Only administrators have the right to use this command.
 
     Example: `!add 02 Test Subject 06-24`
 
-- `!remove <words_in_name> <full_name>` - This command removes a birthday from the dictionary. Note: The `<words_in_name>` must be a numeric value. Only administrators have the right to use this command.
+- `!remove <words_in_name> <full_name> <date>` - This command removes a birthday from the dictionary. Note: The `<words_in_name>` must be a numeric value. Only administrators have the right to use this command.
 
     Example: `!remove 02 Test Subject 06-24`
 
