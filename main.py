@@ -35,13 +35,11 @@ async def check_birthdays():
         date = now.strftime("%m-%d")
         if date != today:
             today = date
-            birthday_today = [name for name,
-                              date in birthdays.items() if date == today]
-            if birthday_today:
+            if birthdays[today]:
                 message_author = await client.fetch_user(int(owner_id))
                 channels = client.get_channel(int(owner_ch))
                 if channels is not None:
-                    for birthday in birthday_today:
+                    for birthday in birthdays[today]:
                         await channels.send(f"Happy Birthday to {birthday} :partying_face: ")
                         await message_author.send(f"It is  {birthday}'s Birthday!")
 
@@ -52,49 +50,63 @@ async def check_birthdays():
 async def on_message(message):
     if message.content.startswith("!add") and message.author.guild_permissions.administrator:
         parts = message.content.split()
-        if len(parts) != 3:
-            await message.channel.send("Invalid syntax. Use: `!add <name> <date>`")
+        words = parts[1]
+        if not words.isnumeric() or len(parts) != int(words) + 3:
+            await message.channel.send("Invalid syntax. Use: `!add <words_in_name> <name> <date>`")
             return
 
-        name = parts[1]
-        date = parts[2]
-
-        birthdays[name] = date
+        fullname = ""
+        for name in range(2, len(parts)-1):
+            fullname += parts[name]+" "
+            fullname.strip()
+        date = parts[len(parts)-1]
+        if date not in birthdays:
+            birthdays[date] = []
+            birthdays[date].append(fullname)
+        else:
+            birthdays[date].append(fullname)
         with open("birthdays.json", "w") as f:
             json.dump(birthdays, f, indent=4)
 
-        await message.channel.send(f"{name}'s birthday added.")
+        await message.channel.send(f"{fullname}'s birthday added.")
 
     elif message.content == "!list":
         if not birthdays:
             await message.channel.send("No birthdays added.")
         else:
             response = "Birthdays:\n"
-            for name, date in birthdays.items():
-                response += f"{name}: {date}\n"
+            for date, name in birthdays.items():
+                if name:
+                    list_of_name = ', '.join(name)
+                    response += f"{list_of_name} : {date}\n"
             await message.channel.send(response)
 
     elif message.content.startswith("!remove") and message.author.guild_permissions.administrator:
         parts = message.content.split()
-        if len(parts) != 2:
-            await message.channel.send("Invalid syntax. Use: `!remove <name>`")
+        words = parts[1]
+        if not words.isnumeric() or len(parts) != int(words) + 3:
+            await message.channel.send("Invalid syntax. Use: `!remove <words_in_name> <name> <date>`")
             return
 
-        name = parts[1]
-        if name in birthdays:
-            del birthdays[name]
-            with open("birthdays.json", "w") as f:
-                json.dump(birthdays, f, indent=4)
-            await message.channel.send(f"{name}'s birthday removed.")
+        fullname = ""
+        for name in range(2, len(parts)-1):
+            fullname += parts[name]+" "
+            fullname.strip()
+        date = parts[len(parts)-1]
+        for dates, names in birthdays.items():
+            if fullname in names and dates == date:
+                names.remove(fullname)
+                with open("birthdays.json", "w") as f:
+                    json.dump(birthdays, f, indent=4)
+                await message.channel.send(f"{fullname}'s birthdays removed.")
+                break
         else:
-            await message.channel.send(f"{name}'s birthday not found.")
+            await message.channel.send(f"{fullname}'s birthday not found.")
 
     elif message.content == "!today":
         today = datetime.now().strftime("%m-%d")
-        today_birthdays = [name for name,
-                           date in birthdays.items() if date == today]
-        if today_birthdays:
-            for birthday in today_birthdays:
+        if birthdays[today]:
+            for birthday in birthdays[today]:
                 await message.channel.send(f"It is {birthday}'s Birthday!")
         else:
             await message.channel.send("No birthdays today.")
