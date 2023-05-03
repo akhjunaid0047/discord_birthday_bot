@@ -35,7 +35,7 @@ async def check_birthdays():
         date = now.strftime("%m-%d")
         if date != today:
             today = date
-            if birthdays[today]:
+            if today in birthdays and birthdays[today] :
                 message_author = await client.fetch_user(int(owner_id))
                 channels = client.get_channel(int(owner_ch))
                 if channels is not None:
@@ -91,7 +91,7 @@ async def on_message(message):
         fullname = ""
         for name in range(2, len(parts)-1):
             fullname += parts[name]+" "
-            fullname.strip()
+        fullname.strip()
         date = parts[len(parts)-1]
         for dates, names in birthdays.items():
             if fullname in names and dates == date:
@@ -105,7 +105,7 @@ async def on_message(message):
 
     elif message.content == "!today":
         today = datetime.now().strftime("%m-%d")
-        if birthdays[today]:
+        if today in birthdays and birthdays[today]:
             for birthday in birthdays[today]:
                 await message.channel.send(f"It is {birthday}'s Birthday!")
         else:
