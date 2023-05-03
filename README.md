@@ -16,7 +16,7 @@ This Command adds a birthday to the dictionary
 Note:   The <words_in_name> must be a numeric value
         Only Administrators have the right to use this command.
         
-Example : !add <02> <Test Subject> <06-24>
+Example : !add 02 Test Subject 06-24
 
 !remove <words_in_name> <full_name> <date>
 
@@ -24,7 +24,7 @@ This Command removes a birthday from the dictionary
 Note:   The <words_in_name> must be a numeric value
         Only Administrators have the right to use this command.
         
-Example : !remove <02> <Test Subject> <06-24>
+Example : !remove 02 Test Subject 06-24
 
 !list
         
