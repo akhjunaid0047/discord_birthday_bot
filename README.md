@@ -11,20 +11,26 @@ The birthdays.json file which will have the birthdays in the dictionary format {
 # COMMANDS
 
 !add <words_in_name> <full_name> <date>
+        
 This Command adds a birthday to the dictionary
 Note:   The <words_in_name> must be a numeric value
         Only Administrators have the right to use this command.
+        
 Example : !add <02> <Test Subject> <06-24>
 
 !remove <words_in_name> <full_name> <date>
-This Command removes a birthday to the dictionary
+
+This Command removes a birthday to the dictionary     
 Note:   The <words_in_name> must be a numeric value
         Only Administrators have the right to use this command.
+        
 Example : !remove <02> <Test Subject> <06-24>
 
 !list
+        
 This Command lists all the birthdays in the dictionary
 
 !today
+
 Tells us whose birthday is it today.
 
