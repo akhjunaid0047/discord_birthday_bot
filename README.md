@@ -2,6 +2,8 @@
 
 A simple Discord Bot which can be used to ping you your friend's birthday
 
+Paste the bot token in the token.txt file
+
 The owner_ch.txt file which will have the channel id in which the bot will ping
 
 The owner_id.txt file which will have your discord user id
