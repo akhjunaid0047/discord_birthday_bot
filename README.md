@@ -1,38 +1,25 @@
-# Discord birthday bot
+# Discord Birthday Bot
 
-A simple Discord Bot which can be used to ping you your friend's birthday
+A simple Discord Bot which can be used to ping you and your friend's birthdays.
 
-Paste the bot token in the token.txt file
+## Setup
 
-The owner_ch.txt file which will have the channel id in which the bot will ping
+1. Clone the repository
+2. Paste the bot token in the `token.txt` file
+3. Put the channel ID in which the bot will ping in the `owner_ch.txt` file
+4. Put your Discord user ID in the `owner_id.txt` file
+5. Add the birthdays in the `birthdays.json` file in the format `{"MM-DD" : "Name"}`
 
-The owner_id.txt file which will have your discord user id
+## Commands
 
-The birthdays.json file which will have the birthdays in the dictionary format {"MM-DD" : "Name"}
+- `!add <words_in_name> <full_name>` - This command adds a birthday to the dictionary. Note: The `<words_in_name>` must be a numeric value. Only administrators have the right to use this command.
 
-# COMMANDS
+    Example: `!add 02 Test Subject 06-24`
 
-!add <words_in_name> <full_name> <date>
-        
-This Command adds a birthday to the dictionary
-Note:   The <words_in_name> must be a numeric value
-        Only Administrators have the right to use this command.
-        
-Example : !add 02 Test Subject 06-24
+- `!remove <words_in_name> <full_name>` - This command removes a birthday from the dictionary. Note: The `<words_in_name>` must be a numeric value. Only administrators have the right to use this command.
 
-!remove <words_in_name> <full_name> <date>
+    Example: `!remove 02 Test Subject 06-24`
 
-This Command removes a birthday from the dictionary     
-Note:   The <words_in_name> must be a numeric value
-        Only Administrators have the right to use this command.
-        
-Example : !remove 02 Test Subject 06-24
+- `!list` - This command lists all the birthdays in the dictionary.
 
-!list
-        
-This Command lists all the birthdays in the dictionary
-
-!today
-
-Tells us whose birthday is it today.
-
+- `!today` - This command tells us whose birthday is it today.
